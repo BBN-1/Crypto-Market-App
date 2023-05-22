@@ -1,0 +1,20 @@
+.footer {
+    background-color: #f0f0f0;
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  .footerContent {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footerContent p {
+    margin: 5px 0;
+  }
+  

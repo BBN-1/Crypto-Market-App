@@ -1,0 +1,36 @@
+.tr {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-flow: row nowrap;
+    font-weight: 700;
+    background-color: #fefeff;
+    align-content: center;
+}
+
+.td {
+    color: #222531;
+    display: flex;
+    font-size: 15px;
+    align-items: center;
+    flex-flow: row nowrap;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 0.5em;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0px;
+    white-space: nowrap;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.coin-logo {
+    height: 30px;
+    object-fit: cover;
+    padding-right: 15px;
+}
+
+.coin-symbol {
+  color: #808AA0;
+}
