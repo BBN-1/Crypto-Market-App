@@ -34,3 +34,11 @@
 .coin-symbol {
   color: #808AA0;
 }
+
+.positive-change {
+    color: greenyellow;
+}
+
+.negative-change {
+    color: red;
+}

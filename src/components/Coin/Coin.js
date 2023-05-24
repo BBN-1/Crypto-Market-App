@@ -34,9 +34,7 @@ const Coin = ({ coin, index }) => {
     return (
         <div className={styles.tr}>
             <div className={`${styles.td} ${flexTdStyle}`}>
-                <span>
-                    {index+1}
-                </span>
+                <span>{index + 1}</span>
             </div>
             <span
                 className={`${styles["logo-and-name-wrapper"]} ${styles.td} ${tdStyle}`}
@@ -51,23 +49,29 @@ const Coin = ({ coin, index }) => {
             <div className={`${styles.td} ${tdStyle}`}>
                 <span>${Number(coin.priceUsd).toFixed(2)}</span>
             </div>
-            <div className={`${styles.td} ${tdStyle}`}>
-                <span>{Number(coin.changePercent24Hr).toFixed(2)}</span>
+            <div
+                className={`${styles.td} ${
+                    Number(coin.changePercent24Hr) > 0
+                        ? styles["positive-change"]
+                        : styles["negative-change"]
+                }`}
+            >
+                <span>{`${Number(coin.changePercent24Hr).toFixed(2)}`}</span>
             </div>
+
             <div className={`${styles.td}`}>
                 <span> {Number(coin.marketCapUsd).toFixed(0)}</span>
             </div>
-            <div
-                className={`${styles.td} ${styles["table-total"]}`}
-                
-            >
+            <div className={`${styles.td} ${styles["table-total"]}`}>
                 <span>{Number(coin.volumeUsd24Hr).toFixed(0)}</span>
             </div>
             <div
                 className={`${styles.td} ${styles["table-total"]}`}
                 style={tableTotalStyle}
-            >   <span>
-                {Number(coin.supply).toFixed(0)} {coin.symbol}
+            >
+                {" "}
+                <span>
+                    {Number(coin.supply).toFixed(0)} {coin.symbol}
                 </span>
             </div>
         </div>
