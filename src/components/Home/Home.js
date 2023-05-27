@@ -1,16 +1,18 @@
-import { getFirstTwelveCoinsByVolume } from "../../services/cryptoData";
+import { getFirstTwelveCoinsByMarketCap } from "../../services/cryptoData";
 import Coin from "../Coin/Coin";
 import { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 
 const Home = () => {
     const [allCoins, setAllCoins] = useState([]);
+    const [sortBy, setSortBy] = useState("marketCapUsd");
+    const [sortOrder, setSortOrder] = useState("desc");
 
     //initial API call of coins data
     useEffect(() => {
         const getApiData = async () => {
             try {
-                const coinsData = await getFirstTwelveCoinsByVolume();
+                const coinsData = await getFirstTwelveCoinsByMarketCap();
                 setAllCoins(coinsData.data);
             } catch (error) {
                 console.log(error);
@@ -18,8 +20,7 @@ const Home = () => {
         };
         getApiData();
 
-
-    //update of API data every 60 seconds 
+        //update of API data every 60 seconds
         const interval = setInterval(() => {
             getApiData();
         }, 60000);
@@ -27,6 +28,39 @@ const Home = () => {
             clearInterval(interval);
         };
     }, []);
+
+    const sortCoins = (key) => {
+        if (sortBy === key) {
+            // If the same key is clicked, toggle the sort order
+            setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+        } else {
+            // If a new key is clicked, set it as the sort key and default to descending order
+            setSortBy(key);
+            setSortOrder("desc");
+        }
+    };
+
+    // Function to sort coins based on the current sort criteria
+    const sortCoinsData = () => {
+        const sortedCoins = [...allCoins].sort((a, b) => {
+            const valueA = a[sortBy];
+            const valueB = b[sortBy];
+
+            // Special case for sorting the "name" field
+            if (sortBy === "name") {
+                return sortOrder === "asc"
+                    ? valueA.localeCompare(valueB)
+                    : valueB.localeCompare(valueA);
+            }
+            return sortOrder === "asc" ? valueA - valueB : valueB - valueA;
+        });
+        setAllCoins(sortedCoins);
+    };
+
+    // Trigger sorting when sortBy or sortOrder changes
+    useEffect(() => {
+        sortCoinsData();
+    }, [sortBy, sortOrder]);
 
     const tableTotalStyle = {
         justifyContent: "flex-start",
@@ -36,14 +70,34 @@ const Home = () => {
         <div className={styles["home-container"]}>
             <section className={styles["table"]}>
                 <div className={`${styles["tr-th"]}`}>
-                    <p className={styles["th-td"]}>#</p>
-                    <p className={styles["th-td"]}>Name</p>
-                    <p className={styles["th-td"]}>Price</p>
-                    <p className={styles["th-td"]}>24h %</p>
-                    <p className={styles["th-td"]}>Market Cap</p>
-                    <p className={styles["th-td"]}>Volume 24h</p>
+                    <p className={styles["th-td"]}>
+                        <span className={styles["home-key-span"]} onClick={() => sortCoins("rank")}> #</span>
+                    </p>
+                    <p className={styles["th-td"]}>
+                        <span className={styles["home-key-span"]} onClick={() => sortCoins("name")}>Name</span>
+                    </p>
+                    <p className={styles["th-td"]}>
+                        <span className={styles["home-key-span"]} onClick={() => sortCoins("priceUsd")}>Price</span>
+                    </p>
+                    <p className={styles["th-td"]}>
+                        <span className={styles["home-key-span"]} onClick={() => sortCoins("changePercent24Hr")}>
+                            24h %
+                        </span>
+                    </p>
+                    <p className={styles["th-td"]}>
+                        <span className={styles["home-key-span"]} onClick={() => sortCoins("marketCapUsd")}>
+                            Market Cap
+                        </span>
+                    </p>
+                    <p className={styles["th-td"]}>
+                        <span className={styles["home-key-span"]} onClick={() => sortCoins("volumeUsd24Hr")}>
+                            Volume 24h
+                        </span>
+                    </p>
                     <p className={styles["th-td"]} style={tableTotalStyle}>
-                        Circulating Supply
+                        <span className={styles["home-key-span"]} onClick={() => sortCoins("supply")}>
+                            Circulating Supply
+                        </span>
                     </p>
                 </div>
 
