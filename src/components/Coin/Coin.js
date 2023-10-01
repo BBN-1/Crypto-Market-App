@@ -33,20 +33,22 @@ const Coin = ({ coin, index }) => {
 
     return (
         <div className={styles.tr}>
-            <div className={`${styles.td} ${flexTdStyle}`}>
+            <div
+                className={`${styles.td} ${flexTdStyle} ${styles["coin-place-row"]}`}
+            >
                 <span>{index + 1}</span>
             </div>
-            <span
-                className={`${styles["logo-and-name-wrapper"]} ${styles.td} ${tdStyle}`}
+            <div
+                className={`${styles["logo-and-name-wrapper"]} ${styles.td} ${tdStyle} ${styles["coin-container"]}`}
             >
                 <img className={styles["coin-logo"]} src={coinLogo} alt="" />
-                <p className={styles["coin-name"]}>
-                    {coin.name}{" "}
+                <div className={styles["coin-info"]}>
+                    <p className={styles["coin-name"]}>{coin.name} </p>
                     <span className={styles["coin-symbol"]}>{coin.symbol}</span>
-                </p>
-            </span>
+                </div>
+            </div>
 
-            <div className={`${styles.td} ${tdStyle}`}>
+            <div className={`${styles.td} ${tdStyle} ${styles["coin-price"]}`}>
                 <span>${Number(coin.priceUsd).toFixed(2)}</span>
             </div>
             <div
@@ -54,19 +56,21 @@ const Coin = ({ coin, index }) => {
                     Number(coin.changePercent24Hr) > 0
                         ? styles["positive-change"]
                         : styles["negative-change"]
-                }`}
+                } ${styles["coin-change-24hours"]}`}
             >
                 <span>{`${Number(coin.changePercent24Hr).toFixed(2)}`}</span>
             </div>
 
-            <div className={`${styles.td}`}>
+            <div className={`${styles.td} ${styles["hide-on-mobile"]}`}>
                 <span> {Number(coin.marketCapUsd).toFixed(0)}</span>
             </div>
-            <div className={`${styles.td} ${styles["table-total"]}`}>
+            <div
+                className={`${styles.td} ${styles["table-total"]} ${styles["hide-on-mobile"]}`}
+            >
                 <span>{Number(coin.volumeUsd24Hr).toFixed(0)}</span>
             </div>
             <div
-                className={`${styles.td} ${styles["table-total"]}`}
+                className={`${styles.td} ${styles["table-total"]} ${styles["hide-on-mobile"]}`}
                 style={tableTotalStyle}
             >
                 {" "}

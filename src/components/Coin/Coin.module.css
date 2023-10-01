@@ -6,6 +6,7 @@
     font-weight: 700;
     background-color: #fefeff;
     align-content: center;
+    
 }
 
 .td {
@@ -41,4 +42,31 @@
 
 .negative-change {
     color: red;
+}
+
+
+
+
+
+/* MOBILE VIEW */
+
+@media (max-width: 768px) {
+
+    .hide-on-mobile {
+        display: none;
+       
+    }
+
+    .coin-place-row {
+       max-width: 30px;
+    }
+
+    .coin-change-24hours {
+        max-width: 55px;
+      
+    }
+
+    .coin-price {
+        max-width: 92px;
+    }
 }

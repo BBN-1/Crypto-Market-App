@@ -12,6 +12,11 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* PREVENT SCROLL BAR WHEN MOB NAV IS OPENED */
+body.mobile-nav-active {
+    overflow-y: hidden;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;

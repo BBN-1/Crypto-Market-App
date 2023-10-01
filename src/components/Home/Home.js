@@ -14,6 +14,8 @@ const Home = () => {
             try {
                 const coinsData = await getFirstTwelveCoinsByMarketCap();
                 setAllCoins(coinsData.data);
+
+             
             } catch (error) {
                 console.log(error);
             }
@@ -23,11 +25,14 @@ const Home = () => {
         //update of API data every 60 seconds
         const interval = setInterval(() => {
             getApiData();
-        }, 60000);
+        }, 10000);
+
         return () => {
             clearInterval(interval);
         };
     }, []);
+
+    console.log(allCoins);
 
     const sortCoins = (key) => {
         if (sortBy === key) {
@@ -42,6 +47,10 @@ const Home = () => {
 
     // Function to sort coins based on the current sort criteria
     const sortCoinsData = () => {
+        if (allCoins.length === 0) {
+            return; // Return early if allCoins is empty
+        }
+
         const sortedCoins = [...allCoins].sort((a, b) => {
             const valueA = a[sortBy];
             const valueB = b[sortBy];
@@ -60,7 +69,7 @@ const Home = () => {
     // Trigger sorting when sortBy or sortOrder changes
     useEffect(() => {
         sortCoinsData();
-    }, [sortBy, sortOrder]);
+    }, [ sortBy, sortOrder]);
 
     const tableTotalStyle = {
         justifyContent: "flex-start",
@@ -70,32 +79,60 @@ const Home = () => {
         <div className={styles["home-container"]}>
             <section className={styles["table"]}>
                 <div className={`${styles["tr-th"]}`}>
-                    <p className={styles["th-td"]}>
-                        <span className={styles["home-key-span"]} onClick={() => sortCoins("rank")}> #</span>
+                    <p className={`${styles["th-td"]} ${styles["coin-rank"]}`}>
+                        <span
+                            className={styles["home-key-span"]}
+                            onClick={() => sortCoins("rank")}
+                        >
+                            {" "}
+                            #
+                        </span>
                     </p>
                     <p className={styles["th-td"]}>
-                        <span className={styles["home-key-span"]} onClick={() => sortCoins("name")}>Name</span>
+                        <span
+                            className={styles["home-key-span"]}
+                            onClick={() => sortCoins("name")}
+                        >
+                            Name
+                        </span>
                     </p>
-                    <p className={styles["th-td"]}>
-                        <span className={styles["home-key-span"]} onClick={() => sortCoins("priceUsd")}>Price</span>
+                    <p className={`${styles["th-td"]} ${styles["coin-price"]}`}>
+                        <span
+                            className={styles["home-key-span"]}
+                            onClick={() => sortCoins("priceUsd")}
+                        >
+                            Price
+                        </span>
                     </p>
-                    <p className={styles["th-td"]}>
-                        <span className={styles["home-key-span"]} onClick={() => sortCoins("changePercent24Hr")}>
+                    <p className={`${styles["th-td"]} ${styles["coin-change-24hours"]}`}>
+                        <span
+                            className={styles["home-key-span"]}
+                            onClick={() => sortCoins("changePercent24Hr")}
+                        >
                             24h %
                         </span>
                     </p>
-                    <p className={styles["th-td"]}>
-                        <span className={styles["home-key-span"]} onClick={() => sortCoins("marketCapUsd")}>
+                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]}`}>
+                        <span
+                            className={styles["home-key-span"]}
+                            onClick={() => sortCoins("marketCapUsd")}
+                        >
                             Market Cap
                         </span>
                     </p>
-                    <p className={styles["th-td"]}>
-                        <span className={styles["home-key-span"]} onClick={() => sortCoins("volumeUsd24Hr")}>
+                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]}`}>
+                        <span
+                            className={styles["home-key-span"]}
+                            onClick={() => sortCoins("volumeUsd24Hr")}
+                        >
                             Volume 24h
                         </span>
                     </p>
-                    <p className={styles["th-td"]} style={tableTotalStyle}>
-                        <span className={styles["home-key-span"]} onClick={() => sortCoins("supply")}>
+                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]}`} style={tableTotalStyle} >
+                        <span
+                            className={styles["home-key-span"]}
+                            onClick={() => sortCoins("supply")}
+                        >
                             Circulating Supply
                         </span>
                     </p>

@@ -1,50 +1,93 @@
-
 .home-container {
-  padding-left: 100px;
-  padding-right: 100px;
-  background-color: #FEFEFF;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: #fefeff;
 }
 
 .table {
-  display: flex;
-  flex-flow: column nowrap;
-  font-size: .8rem;
-  margin: 0.5rem;
-  line-height: 1.5;
-  border-bottom: 1px solid #FEFEFF;
-  flex: 1 1 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 0.8rem;
+    margin: 0.5rem;
+    line-height: 1.5;
+    border-bottom: 1px solid #fefeff;
+    flex: 1 1 auto;
 }
-
 
 .tr-th {
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  font-weight: 700;
-  font-size: 14px;
-  background-color: #FEFEFF;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    font-weight: 700;
+    font-size: 14px;
+    background-color: #fefeff;
 }
 
-
-
 .th-td {
-  color: #222531;
-  display: flex;
-  align-items: center;
-  flex-flow: row nowrap;
-  flex-grow: 1;
-  flex-basis: 0;
-  padding: 0.5em;
-  word-break: break-word;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0px;
-  white-space: nowrap;
-  border-bottom: 1px solid #d0d0d0;
-  
+    color: #222531;
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 0.5em;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0px;
+    white-space: nowrap;
+    border-bottom: 1px solid #d0d0d0;
 }
 
 .home-key-span:hover {
-  cursor: pointer;
+    cursor: pointer;
+    color: #3861fb;
 }
 
+.coin-container {
+    display: flex;
+    flex-direction: column;
+    /* Additional styles as needed */
+}
+
+.coin-info {
+    text-align: center; /* Center-align the coin name and symbol */
+}
+/* MOBILE VIEW */
+
+@media (max-width: 768px) {
+    .responsive-table th,
+    .responsive-table td {
+        /* Modify styles for smaller screens, for example, increase font size or change padding */
+        padding: 4px;
+    }
+
+    /* Hide some columns on mobile if needed */
+    .th-td-responsive {
+        display: none;
+    }
+
+    .home-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .coin-rank {
+        max-width: 30px;
+    }
+
+    .coin-change-24hours{
+      max-width: 55px;
+    }
+
+    .coin-price {
+      max-width: 92px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .home-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
