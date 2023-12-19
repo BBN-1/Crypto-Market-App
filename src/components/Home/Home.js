@@ -32,7 +32,7 @@ const Home = () => {
         };
     }, []);
 
-    console.log(allCoins);
+   
 
     const sortCoins = (key) => {
         if (sortBy === key) {

@@ -31,7 +31,7 @@ const Header = () => {
             <nav className={styles["navbar"]}>
                 <ul className={styles["navbarList"]}>
                     <li className={styles["navbarItem"]}>
-                        <a href="#home" className={styles["navbarLink"]}>
+                        <a href="/" className={styles["navbarLink"]}>
                             Home
                         </a>
                     </li>

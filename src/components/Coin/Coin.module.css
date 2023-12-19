@@ -6,6 +6,7 @@
     font-weight: 700;
     background-color: #fefeff;
     align-content: center;
+    text-decoration: none;
     
 }
 
@@ -26,6 +27,14 @@
     border-bottom: 1px solid #d0d0d0;
 }
 
+.flexTdStyle {
+    flex-wrap: 2;
+}
+
+.tableTotalStyle {
+    justify-content: flex-start;
+}
+
 .coin-logo {
     height: 30px;
     object-fit: cover;
@@ -42,6 +51,10 @@
 
 .negative-change {
     color: red;
+}
+
+.align-right {
+    text-align: right;
 }
 
 

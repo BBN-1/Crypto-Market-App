@@ -1,0 +1,131 @@
+.coin-details-container {
+    width: 100%;
+    min-height: 80vh;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: transparent;
+}
+
+/* Card Section Styles*/
+.coin-details-card {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.card-header-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    background-color: transparent;
+}
+
+.header-icon-and-price-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+    background-color: transparent;
+}
+
+/* COIN HEADER SOCIAL AND SAVE */
+
+.share-icon,
+.star-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    background-color: #eff2f5;
+    border-radius: 7px;
+}
+
+.header-icons-container {
+    display: flex;
+    gap: 8px;
+}
+
+.header-icons-container svg {
+    width: 20px;
+    height: 20px;
+    fill: #616e85;
+    background-color: #eff2f5;
+}
+
+.coin-logo {
+    height: 24px;
+}
+
+.coin-name {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.coin-symbol {
+    color: #616e85;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.card-header-bottom {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+}
+
+.coin-price {
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.coin-percentage-change {
+    font-size: 16px;
+    font-weight: 800;
+    color: #16c784;
+}
+
+/* CANDLES SECTION */
+
+.coin-details-candles-container {
+    margin-top: 30px;
+}
+
+.coin-details-candles-container {
+    background-color: aquamarine;
+    flex: 60%;
+}
+
+/* STATISTICS SECTION */
+
+.coin-statistics-container {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.statistics-item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eff2f5;
+    padding: 12px;
+    border-radius: 7px;
+}
+
+.statistics-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.statistics-header-text {
+    color: black;
+    font-weight: 600;
+}
