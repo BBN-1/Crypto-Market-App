@@ -1,4 +1,6 @@
 .home-container {
+    margin: 0 auto;
+    width: 85%;
     padding-left: 100px;
     padding-right: 100px;
     background-color: #fefeff;
@@ -39,6 +41,10 @@
     border-bottom: 1px solid #d0d0d0;
 }
 
+.align-right {
+    justify-content: flex-end;
+}
+
 .home-key-span:hover {
     cursor: pointer;
     color: #3861fb;
@@ -52,6 +58,14 @@
 
 .coin-info {
     text-align: center; /* Center-align the coin name and symbol */
+}
+
+.coin-rank {
+    flex: 0.2;
+}
+
+.coin-change-24hours {
+    flex: 0.3;
 }
 /* MOBILE VIEW */
 
@@ -89,5 +103,6 @@
     .home-container {
         padding-left: 10px;
         padding-right: 10px;
+        width: 100%;
     }
 }

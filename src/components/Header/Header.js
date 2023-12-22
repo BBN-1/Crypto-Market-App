@@ -3,6 +3,7 @@ import logo from "./logo.png";
 import styles from "./Header.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { IoMenuOutline } from "react-icons/io5";
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -24,17 +25,23 @@ const Header = () => {
     }, [menuOpen]);
 
     return (
+        <>
         <header className={styles["header"]}>
-            <div className={styles["logo"]}>
-                <img src={logo} alt="Logo" className={styles["logoImage"]} />
-            </div>
+            
+                <div className={styles["logo"]}>
+                <Link to="/">
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        className={styles["logoImage"]}
+                    />
+                     </Link>
+                </div>
+           
+
             <nav className={styles["navbar"]}>
                 <ul className={styles["navbarList"]}>
-                    <li className={styles["navbarItem"]}>
-                        <a href="/" className={styles["navbarLink"]}>
-                            Home
-                        </a>
-                    </li>
+               
                     <li className={styles["navbarItem"]}>
                         <a href="#about" className={styles["navbarLink"]}>
                             About
@@ -52,12 +59,10 @@ const Header = () => {
                     </li>
                 </ul>
                 <button
+                    className={styles["header-menu-btn"]}
                     onClick={toggleHamburgerMenu}
-                    className={`${styles["header-hamburger"]} ${
-                        menuOpen ? styles["is-active"] : ""
-                    }`}
                 >
-                    <div className={styles["hamburger-bar"]}></div>
+                    <IoMenuOutline />
                 </button>
             </nav>
 
@@ -77,6 +82,8 @@ const Header = () => {
                 </Link>
             </nav>
         </header>
+        
+        </>
     );
 };
 

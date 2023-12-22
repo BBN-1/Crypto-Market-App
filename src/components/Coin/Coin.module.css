@@ -27,6 +27,7 @@
     border-bottom: 1px solid #d0d0d0;
 }
 
+
 .flexTdStyle {
     flex-wrap: 2;
 }
@@ -54,8 +55,18 @@
 }
 
 .align-right {
-    text-align: right;
+    justify-content: flex-end;
 }
+
+.coin-place-row {
+    flex: 0.2;
+}
+
+.coin-change-24hours {
+    flex: 0.3;
+}
+
+
 
 
 

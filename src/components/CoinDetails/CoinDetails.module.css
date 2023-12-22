@@ -13,6 +13,10 @@
     background-color: transparent;
 }
 
+.coin-details-card-header {
+    padding-bottom: 30px;
+}
+
 .card-header-top {
     display: flex;
     justify-content: space-between;
@@ -79,7 +83,7 @@
 }
 
 .coin-price {
-    font-size: 35px;
+    font-size: 33px;
     font-weight: 700;
 }
 
@@ -91,14 +95,12 @@
 
 /* CANDLES SECTION */
 
-.coin-details-candles-container {
-    margin-top: 30px;
+.candles-header-text {
+    padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600; 
 }
 
-.coin-details-candles-container {
-    background-color: aquamarine;
-    flex: 60%;
-}
 
 /* STATISTICS SECTION */
 

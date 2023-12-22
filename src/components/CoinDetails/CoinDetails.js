@@ -1,14 +1,29 @@
 import styles from "./CoinDetails.module.css";
+import {
+    LineChart,
+    Line,
+    AreaChart,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+    Area,
+} from "recharts";
+import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getFirstTwelveCoinsByMarketCap } from "../../services/cryptoData";
 import { formatNumberWithColons } from "../../services/numberFormatting";
+import { fetchCoinHistory } from "../../services/singleCryptoHistoryData";
 import { CiStar, CiShare2 } from "react-icons/ci";
 
 const CoinDetails = () => {
     const [coinData, setCoinData] = useState({});
-    const { coinName } = useParams();
+    const { coinName, coinId } = useParams();
     const [coinLogo, setCoinLogo] = useState("");
+    const [coinHistory, setCoinHistory] = useState([]);
 
     // Function to fetch the latest data for the specific coin
     const fetchLatestData = async () => {
@@ -30,6 +45,29 @@ const CoinDetails = () => {
     useEffect(() => {
         fetchLatestData();
     }, [coinName]);
+
+
+    //TO FORMAT THE PRICE!!
+    // Fetch history data for the specific coin
+    useEffect(() => {
+        const fetchHistory = async () => {
+            try {
+                const data = await fetchCoinHistory(coinId);
+
+                setCoinHistory(data);
+            } catch (error) {
+                console.error("Error fetching history data:", error);
+            }
+        };
+
+        fetchHistory();
+    }, [coinName]);
+
+    // Options for the chart
+    const data = coinHistory.map((item) => ({
+        date: new Date(item.date).toLocaleDateString(),
+        price: parseFloat(item.priceUsd),
+    }));
 
     //Load coin logo img
     useEffect(() => {
@@ -57,7 +95,30 @@ const CoinDetails = () => {
         return () => clearInterval(interval);
     }, [coinName]);
 
-    console.log(typeof coinData.priceUsd);
+    // Media query for mobile devices
+    const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
+
+    // Custom tick for the X-axis
+    const CustomTick = ({ x, y, payload }) => {
+        const date = new Date(payload.value);
+        const formattedDate = isMobile
+            ? date.toLocaleDateString("default", { month: "short" })
+            : date.toLocaleDateString();
+        return (
+            <g transform={`translate(${x},${y})`}>
+                <text
+                    x={0}
+                    y={0}
+                    dy={16}
+                    textAnchor="middle"
+                    fill="#666"
+                    style={{ fontSize: isMobile ? "10px" : "14px" }}
+                >
+                    {formattedDate}
+                </text>
+            </g>
+        );
+    };
 
     return (
         <div className={styles["coin-details-container"]}>
@@ -102,15 +163,44 @@ const CoinDetails = () => {
                     </div>
                 </header>
 
+                <div className={styles["coin-details-candles-container"]}>
+                    <p className={styles["candles-header-text"]}>
+                        {coinData.name} to USD Chart
+                    </p>
+                    <ResponsiveContainer width="100%" height={200}>
+                        <AreaChart
+                            data={data}
+                            margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="date" tick={<CustomTick />} />
+                            <YAxis />
+                            <Tooltip />
+                            <Area
+                                type="monotone"
+                                dataKey="price"
+                                stroke="#8884d8"
+                                fill="#16c784"
+                            />
+                        </AreaChart>
+                    </ResponsiveContainer>
+                </div>
+
                 <section className={styles["coin-statistics-container"]}>
-                    <p className={styles["statistics-header-text"]}>{coinData.name} statistics</p>
+                    <p className={styles["statistics-header-text"]}>
+                        {coinData.name} statistics
+                    </p>
                     <div className={styles["statistics-item-wrapper"]}>
                         <p>Market cap</p>
-                        <p className={styles["statistics-text"]}>${formatNumberWithColons(coinData.marketCapUsd)}</p>
+                        <p className={styles["statistics-text"]}>
+                            ${formatNumberWithColons(coinData.marketCapUsd)}
+                        </p>
                     </div>
                     <div className={styles["statistics-item-wrapper"]}>
                         <p>Volume (24h)</p>
-                        <p className={styles["statistics-text"]}>${formatNumberWithColons(coinData.volumeUsd24Hr)}</p>
+                        <p className={styles["statistics-text"]}>
+                            ${formatNumberWithColons(coinData.volumeUsd24Hr)}
+                        </p>
                     </div>
                     <div className={styles["statistics-item-wrapper"]}>
                         <p>Circulating supply</p>

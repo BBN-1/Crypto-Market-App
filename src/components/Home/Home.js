@@ -72,7 +72,7 @@ const Home = () => {
     }, [ sortBy, sortOrder]);
 
     const tableTotalStyle = {
-        justifyContent: "flex-start",
+        justifyContent: "flex-end",
     };
 
     return (
@@ -96,7 +96,7 @@ const Home = () => {
                             Name
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["coin-price"]}`}>
+                    <p className={`${styles["th-td"]} ${styles["coin-price"]} ${styles["align-right"]}`}>
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("priceUsd")}
@@ -104,7 +104,7 @@ const Home = () => {
                             Price
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["coin-change-24hours"]}`}>
+                    <p className={`${styles["th-td"]} ${styles["coin-change-24hours"]} ${styles["align-right"]}`}>
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("changePercent24Hr")}
@@ -112,7 +112,8 @@ const Home = () => {
                             24h %
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]}`}>
+           
+                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}>
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("marketCapUsd")}
@@ -120,7 +121,7 @@ const Home = () => {
                             Market Cap
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]}`}>
+                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}>
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("volumeUsd24Hr")}
@@ -128,12 +129,20 @@ const Home = () => {
                             Volume 24h
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]}`} style={tableTotalStyle} >
+                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}` }  >
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("supply")}
                         >
                             Circulating Supply
+                        </span>
+                    </p>
+                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}  >
+                        <span
+                            className={styles["home-key-span"]}
+                            
+                        >
+                            Last Year
                         </span>
                     </p>
                 </div>

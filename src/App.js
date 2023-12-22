@@ -14,7 +14,7 @@ function App() {
                     <Route path="/" element={<Home />} />
 
                     <Route
-                        path="/currencies/:coinName"
+                        path="/currencies/:coinName/:coinId"
                         element={<CoinDetails />}
                     />
                 </Routes>
