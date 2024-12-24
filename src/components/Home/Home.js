@@ -1,11 +1,17 @@
+// Import necessary libraries and components
 import { getFirstTwelveCoinsByMarketCap } from "../../services/cryptoData";
 import Coin from "../Coin/Coin";
 import { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 
 const Home = () => {
+    // State to hold the data of all coins
     const [allCoins, setAllCoins] = useState([]);
+
+    // State to hold the current sort criteria
     const [sortBy, setSortBy] = useState("marketCapUsd");
+
+    // State to hold the current sort order
     const [sortOrder, setSortOrder] = useState("desc");
 
     //initial API call of coins data
@@ -14,8 +20,6 @@ const Home = () => {
             try {
                 const coinsData = await getFirstTwelveCoinsByMarketCap();
                 setAllCoins(coinsData.data);
-
-             
             } catch (error) {
                 console.log(error);
             }
@@ -32,8 +36,7 @@ const Home = () => {
         };
     }, []);
 
-   
-
+    // Function to sort coins based on the key clicked
     const sortCoins = (key) => {
         if (sortBy === key) {
             // If the same key is clicked, toggle the sort order
@@ -51,6 +54,7 @@ const Home = () => {
             return; // Return early if allCoins is empty
         }
 
+        // Sort coins in ascending or descending order based on the selected key (sortBy) and sort order
         const sortedCoins = [...allCoins].sort((a, b) => {
             const valueA = a[sortBy];
             const valueB = b[sortBy];
@@ -69,7 +73,7 @@ const Home = () => {
     // Trigger sorting when sortBy or sortOrder changes
     useEffect(() => {
         sortCoinsData();
-    }, [ sortBy, sortOrder]);
+    }, [sortBy, sortOrder]);
 
     const tableTotalStyle = {
         justifyContent: "flex-end",
@@ -96,7 +100,9 @@ const Home = () => {
                             Name
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["coin-price"]} ${styles["align-right"]}`}>
+                    <p
+                        className={`${styles["th-td"]} ${styles["coin-price"]} ${styles["align-right"]}`}
+                    >
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("priceUsd")}
@@ -104,7 +110,9 @@ const Home = () => {
                             Price
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["coin-change-24hours"]} ${styles["align-right"]}`}>
+                    <p
+                        className={`${styles["th-td"]} ${styles["coin-change-24hours"]} ${styles["align-right"]}`}
+                    >
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("changePercent24Hr")}
@@ -112,8 +120,10 @@ const Home = () => {
                             24h %
                         </span>
                     </p>
-           
-                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}>
+
+                    <p
+                        className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}
+                    >
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("marketCapUsd")}
@@ -121,7 +131,9 @@ const Home = () => {
                             Market Cap
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}>
+                    <p
+                        className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}
+                    >
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("volumeUsd24Hr")}
@@ -129,7 +141,9 @@ const Home = () => {
                             Volume 24h
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}` }  >
+                    <p
+                        className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}
+                    >
                         <span
                             className={styles["home-key-span"]}
                             onClick={() => sortCoins("supply")}
@@ -137,11 +151,10 @@ const Home = () => {
                             Circulating Supply
                         </span>
                     </p>
-                    <p className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}  >
-                        <span
-                            className={styles["home-key-span"]}
-                            
-                        >
+                    <p
+                        className={`${styles["th-td"]} ${styles["th-td-responsive"]} ${styles["align-right"]}`}
+                    >
+                        <span className={styles["home-key-span"]}>
                             Last Year
                         </span>
                     </p>

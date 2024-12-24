@@ -1,13 +1,10 @@
 import styles from "./CoinDetails.module.css";
 import {
-    LineChart,
-    Line,
     AreaChart,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend,
     ResponsiveContainer,
     Area,
 } from "recharts";
@@ -46,8 +43,6 @@ const CoinDetails = () => {
         fetchLatestData();
     }, [coinName]);
 
-
-    //TO FORMAT THE PRICE!!
     // Fetch history data for the specific coin
     useEffect(() => {
         const fetchHistory = async () => {
@@ -63,7 +58,7 @@ const CoinDetails = () => {
         fetchHistory();
     }, [coinName]);
 
-    // Options for the chart
+    // Map the historical data to a format suitable for the AreaChart
     const data = coinHistory.map((item) => ({
         date: new Date(item.date).toLocaleDateString(),
         price: parseFloat(item.priceUsd),
@@ -77,8 +72,12 @@ const CoinDetails = () => {
                 const imageSrc = logo.default;
                 setCoinLogo(imageSrc);
             } catch (error) {
-                // Handle error if the image is not found
-                console.log(`Error loading coin logo for ${coinName}`);
+                console.log(
+                    `Error loading coin logo for ${coinName}, using default image`
+                );
+                // Fallback to default.png if the coin image is not found
+                const defaultLogo = await import(`../../coinLogos/default.png`);
+                setCoinLogo(defaultLogo.default);
             }
         };
 

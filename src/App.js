@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -9,10 +10,12 @@ function App() {
     return (
         <div className="App">
             <Header />
+            {/* Provide the CoinContext to the components */}
             <CoinProvider>
                 <Routes>
                     <Route path="/" element={<Home />} />
 
+                    {/* Define the route for the CoinDetails component with dynamic parameters */}
                     <Route
                         path="/currencies/:coinName/:coinId"
                         element={<CoinDetails />}
